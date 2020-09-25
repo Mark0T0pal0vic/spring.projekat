@@ -52,4 +52,18 @@ public class Stavka_DokumentaControllor {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@RequestMapping(value = "api/robas/{robaId}/stavkaDokumentas", method = RequestMethod.GET)
+	public ResponseEntity<List<Stavka_Dokumenta>> findRobaStavkaDokumentas(@PathVariable Long robaId) {
+		List<Stavka_Dokumenta> sds = sdService.findByRobaId(robaId);
+		
+		return new ResponseEntity<>(sds, HttpStatus.OK); 
+	}
+	
+	@RequestMapping(value = "api/dokuments/{dokumentId}/stavkaDokumentas", method = RequestMethod.GET)
+	public ResponseEntity<List<Stavka_Dokumenta>> findDokumentStavkaDokumentas(@PathVariable Long dokumentId) {
+		List<Stavka_Dokumenta> sds = sdService.findByDokumentId(dokumentId);
+		
+		return new ResponseEntity<>(sds, HttpStatus.OK); 
+	}
 }

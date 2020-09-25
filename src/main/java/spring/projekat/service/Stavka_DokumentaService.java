@@ -11,7 +11,7 @@ import spring.projekat.repository.Stavka_DokumentaRepository;
 @Service
 public class Stavka_DokumentaService {
 	
-	//NIJE ZAVRSENO!!!!!
+	
 	@Autowired
 	Stavka_DokumentaRepository sdRepository;
 	
@@ -29,5 +29,13 @@ public class Stavka_DokumentaService {
 	
 	public void remove(Long id) {
 		sdRepository.deleteById(id);
+	}
+	
+	public List<Stavka_Dokumenta> findByRobaId(Long robaId){
+		return sdRepository.findByRobaId(robaId);
+	}
+	
+	public List<Stavka_Dokumenta> findByDokumentId(Long dokumentId){
+		return sdRepository.findByRobaId(dokumentId);
 	}
 }

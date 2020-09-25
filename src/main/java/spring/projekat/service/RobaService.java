@@ -11,9 +11,12 @@ import spring.projekat.repository.RobaRepository;
 @Service
 public class RobaService {
 
-	//NIJE ZAVRSENO!!!!!
+	
 	@Autowired
 	RobaRepository robaRepository;
+	
+	@Autowired
+	Stavka_DokumentaService sdService;
 	
 	public List<Roba> findAll(){
 		return robaRepository.findAll();
@@ -29,6 +32,9 @@ public class RobaService {
 	
 	public void remove(Long id) {
 		//dozvoliti brisanje predmeta koji nemaju Stavka_Dokumenta!!!!
-		robaRepository.deleteById(id);
+		if (sdService.findByRobaId(id).isEmpty()) {
+			robaRepository.deleteById(id);
+		}
+		
 	}
 }

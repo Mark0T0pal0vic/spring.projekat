@@ -15,6 +15,9 @@ public class DokumentService {
 	@Autowired
 	DokumentRepository dokumentRepository;
 	
+	@Autowired
+	Stavka_DokumentaService sdService;
+	
 	public List<Dokument> findAll(){
 		return dokumentRepository.findAll();
 	}
@@ -29,7 +32,10 @@ public class DokumentService {
 	
 	public void remove(Long id) {
 		//dozvoliti brisanje predmeta koji nemaju Stavka_Dokumenta!!!!
-		dokumentRepository.deleteById(id);
+		if (sdService.findByDokumentId(id).isEmpty()) {
+			dokumentRepository.deleteById(id);
+		}
+		
 	}
 	
 }
