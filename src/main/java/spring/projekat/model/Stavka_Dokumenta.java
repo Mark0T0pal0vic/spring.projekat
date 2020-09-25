@@ -28,18 +28,18 @@ public class Stavka_Dokumenta {
 	@ManyToOne
 	private Roba roba;
 
-	public Stavka_Dokumenta(long id, int quantity, double price, Dokument dokumentId, Roba robaId) {
+	public Stavka_Dokumenta() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Stavka_Dokumenta(long id, int quantity, double price, Dokument dokument, Roba roba) {
 		super();
 		this.id = id;
 		this.quantity = quantity;
 		this.price = price;
-		this.dokument = dokumentId;
-		this.roba = robaId;
-	}
-
-	public Stavka_Dokumenta() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.dokument = dokument;
+		this.roba = roba;
 	}
 
 	public long getId() {
@@ -66,21 +66,23 @@ public class Stavka_Dokumenta {
 		this.price = price;
 	}
 
-	public Dokument getDokumentId() {
+	public Dokument getDokument() {
 		return dokument;
 	}
 
-	public void setDokumentId(Dokument dokumentId) {
-		this.dokument = dokumentId;
+	public void setDokument(Dokument dokument) {
+		this.dokument = dokument;
 	}
 
-	public Roba getRobaId() {
+	public Roba getRoba() {
 		return roba;
 	}
 
-	public void setRobaId(Roba robaId) {
-		this.roba = robaId;
+	public void setRoba(Roba roba) {
+		this.roba = roba;
 	}
+
+	
 	
 	
 }
