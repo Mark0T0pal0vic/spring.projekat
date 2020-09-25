@@ -6,8 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="t_stavka_dokumenta")
 public class Stavka_Dokumenta {
 
 	@Id
@@ -21,18 +23,18 @@ public class Stavka_Dokumenta {
 	private double price;
 	
 	@ManyToOne
-	private Dokument dokumentId;
+	private Dokument dokument;
 	
 	@ManyToOne
-	private Roba robaId;
+	private Roba roba;
 
 	public Stavka_Dokumenta(long id, int quantity, double price, Dokument dokumentId, Roba robaId) {
 		super();
 		this.id = id;
 		this.quantity = quantity;
 		this.price = price;
-		this.dokumentId = dokumentId;
-		this.robaId = robaId;
+		this.dokument = dokumentId;
+		this.roba = robaId;
 	}
 
 	public Stavka_Dokumenta() {
@@ -65,19 +67,19 @@ public class Stavka_Dokumenta {
 	}
 
 	public Dokument getDokumentId() {
-		return dokumentId;
+		return dokument;
 	}
 
 	public void setDokumentId(Dokument dokumentId) {
-		this.dokumentId = dokumentId;
+		this.dokument = dokumentId;
 	}
 
 	public Roba getRobaId() {
-		return robaId;
+		return roba;
 	}
 
 	public void setRobaId(Roba robaId) {
-		this.robaId = robaId;
+		this.roba = robaId;
 	}
 	
 	

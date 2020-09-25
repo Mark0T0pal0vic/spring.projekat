@@ -1,5 +1,55 @@
 package spring.projekat.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import spring.projekat.model.Stavka_Dokumenta;
+import spring.projekat.service.Stavka_DokumentaService;
+
+@RestController
 public class Stavka_DokumentaControllor {
 
+	@Autowired
+	Stavka_DokumentaService sdService;
+	
+	@RequestMapping(value = "api/stavkaDokumentas", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<List<Stavka_Dokumenta>> getAllStavkaDokuments(){
+		List<Stavka_Dokumenta> sds = sdService.findAll();
+		
+		return new ResponseEntity<>(sds, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "api/stavkaDokumentas/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Stavka_Dokumenta> getExam(@PathVariable Long id) {
+		Stavka_Dokumenta sd = sdService.findOne(id);
+
+		return new ResponseEntity<>(sd, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "api/stavkaDokumentas", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Stavka_Dokumenta> create(@RequestBody Stavka_Dokumenta sd) {
+		Stavka_Dokumenta retVal = sdService.save(sd);
+
+		return new ResponseEntity<>(retVal, HttpStatus.CREATED);
+	}
+
+	@RequestMapping(value = "api/stavkaDokumentas/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		Stavka_Dokumenta sd = sdService.findOne(id);
+		if (sd != null) {
+			sdService.remove(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 }
