@@ -21,9 +21,7 @@ public class DokumentControllor {
 
 	
 	@Autowired
-	DokumentService dokumentService;
-	
-	
+	DokumentService dokumentService;	
 	
 	@RequestMapping(value = "api/dokuments", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<List<Dokument>> getAllDokuments(){

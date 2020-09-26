@@ -3,16 +3,20 @@ package spring.projekat.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name="t_dokument")
+@Table(catalog = "spring.projekat", name="t_dokument")
 public class Dokument {
 
 	@Id
@@ -25,15 +29,15 @@ public class Dokument {
 	@Column(nullable=false)
 	private double price;
 	
-	@OneToMany(mappedBy="dokument")
+	
+	@OneToMany(mappedBy="dokument", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Stavka_Dokumenta> stavkaDokumenta = new HashSet<Stavka_Dokumenta>();
 
-	public Dokument(long id, String name, double price, Set<Stavka_Dokumenta> stavkaDokumenta) {
+	public Dokument(long id, String name, double price) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
-		this.stavkaDokumenta = stavkaDokumenta;
 	}
 
 	public Dokument() {
@@ -72,7 +76,5 @@ public class Dokument {
 	public void setStavkaDokumenta(Set<Stavka_Dokumenta> stavkaDokumenta) {
 		this.stavkaDokumenta = stavkaDokumenta;
 	}
-	
-	
 	
 }

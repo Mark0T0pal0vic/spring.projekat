@@ -28,7 +28,7 @@ public class Stavka_DokumentaControllor {
 		return new ResponseEntity<>(sds, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "api/stavkaDokumentas/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "api/stavkaDokumenta/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Stavka_Dokumenta> getExam(@PathVariable Long id) {
 		Stavka_Dokumenta sd = sdService.findOne(id);
 

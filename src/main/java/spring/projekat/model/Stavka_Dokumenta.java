@@ -2,14 +2,17 @@ package spring.projekat.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name="t_stavka_dokumenta")
+@Table(catalog = "spring.projekat", name="t_stavka_dokumenta")
 public class Stavka_Dokumenta {
 
 	@Id
@@ -22,11 +25,13 @@ public class Stavka_Dokumenta {
 	@Column(nullable=false)
 	private double price;
 	
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Dokument dokument;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER) 
 	private Roba roba;
+	
 
 	public Stavka_Dokumenta() {
 		super();
@@ -39,7 +44,7 @@ public class Stavka_Dokumenta {
 		this.quantity = quantity;
 		this.price = price;
 		this.dokument = dokument;
-		this.roba = roba;
+		this.roba = roba;		
 	}
 
 	public long getId() {
@@ -82,7 +87,7 @@ public class Stavka_Dokumenta {
 		this.roba = roba;
 	}
 
-	
+
 	
 	
 }

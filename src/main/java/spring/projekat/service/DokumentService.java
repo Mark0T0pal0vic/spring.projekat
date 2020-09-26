@@ -11,7 +11,6 @@ import spring.projekat.repository.DokumentRepository;
 @Service
 public class DokumentService {
 
-	//NIJE ZAVRSENO
 	@Autowired
 	DokumentRepository dokumentRepository;
 	
