@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import io.swagger.annotations.ApiOperation;
 import spring.projekat.model.Dokument;
 import spring.projekat.service.DokumentService;
 
@@ -23,6 +23,7 @@ public class DokumentControllor {
 	@Autowired
 	DokumentService dokumentService;	
 	
+	//GET/ALL
 	@RequestMapping(value = "api/dokuments", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<List<Dokument>> getAllDokuments(){
 		List<Dokument> dokuments = dokumentService.findAll();
@@ -30,6 +31,8 @@ public class DokumentControllor {
 		return new ResponseEntity<>(dokuments, HttpStatus.OK);
 	}
 	
+	//GET/ONE
+	@ApiOperation(value = "Pronalazi dokumenta po id-u", notes = "Pomocu id-a pronalazi odredjeni dokument")
 	@RequestMapping(value = "api/dokument/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Dokument> getDokument(@PathVariable Long id){
 		Dokument dokument = dokumentService.findOne(id);
@@ -37,6 +40,7 @@ public class DokumentControllor {
 		return new ResponseEntity<>(dokument, HttpStatus.OK);
 	}
 	
+	//POST
 	@RequestMapping(value = "api/dokuments", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Dokument> create(@RequestBody Dokument dokument) {
 		Dokument retVal = dokumentService.save(dokument);
@@ -44,6 +48,8 @@ public class DokumentControllor {
 		return new ResponseEntity<>(retVal, HttpStatus.CREATED);
 	}
 	
+	
+	//PUT
 	@RequestMapping(value = "api/dokuments/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Dokument> update(@PathVariable Long id,
 			@RequestBody Dokument dokument) {
@@ -53,6 +59,7 @@ public class DokumentControllor {
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
 	
+	//DELETE
 	@RequestMapping(value = "api/dokuments/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		Dokument dokument = dokumentService.findOne(id);

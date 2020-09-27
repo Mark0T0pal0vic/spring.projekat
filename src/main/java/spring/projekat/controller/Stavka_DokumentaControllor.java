@@ -18,9 +18,12 @@ import spring.projekat.service.Stavka_DokumentaService;
 @RestController
 public class Stavka_DokumentaControllor {
 
+	//PUT????
 	@Autowired
 	Stavka_DokumentaService sdService;
 	
+	
+	//GET/ALL
 	@RequestMapping(value = "api/stavkaDokumentas", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<List<Stavka_Dokumenta>> getAllStavkaDokuments(){
 		List<Stavka_Dokumenta> sds = sdService.findAll();
@@ -28,6 +31,7 @@ public class Stavka_DokumentaControllor {
 		return new ResponseEntity<>(sds, HttpStatus.OK);
 	}
 	
+	//GET/ONE
 	@RequestMapping(value = "api/stavkaDokumenta/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Stavka_Dokumenta> getExam(@PathVariable Long id) {
 		Stavka_Dokumenta sd = sdService.findOne(id);
@@ -35,6 +39,7 @@ public class Stavka_DokumentaControllor {
 		return new ResponseEntity<>(sd, HttpStatus.OK);
 	}
 
+	//POST
 	@RequestMapping(value = "api/stavkaDokumentas", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Stavka_Dokumenta> create(@RequestBody Stavka_Dokumenta sd) {
 		Stavka_Dokumenta retVal = sdService.save(sd);
@@ -42,6 +47,7 @@ public class Stavka_DokumentaControllor {
 		return new ResponseEntity<>(retVal, HttpStatus.CREATED);
 	}
 
+	//DELETE
 	@RequestMapping(value = "api/stavkaDokumentas/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		Stavka_Dokumenta sd = sdService.findOne(id);
@@ -53,6 +59,7 @@ public class Stavka_DokumentaControllor {
 		}
 	}
 	
+	//GET/ROBAID
 	@RequestMapping(value = "api/robas/{robaId}/stavkaDokumentas", method = RequestMethod.GET)
 	public ResponseEntity<List<Stavka_Dokumenta>> findRobaStavkaDokumentas(@PathVariable Long robaId) {
 		List<Stavka_Dokumenta> sds = sdService.findByRobaId(robaId);
@@ -60,6 +67,7 @@ public class Stavka_DokumentaControllor {
 		return new ResponseEntity<>(sds, HttpStatus.OK); 
 	}
 	
+	//GET/DOKUMENTID
 	@RequestMapping(value = "api/dokuments/{dokumentId}/stavkaDokumentas", method = RequestMethod.GET)
 	public ResponseEntity<List<Stavka_Dokumenta>> findDokumentStavkaDokumentas(@PathVariable Long dokumentId) {
 		List<Stavka_Dokumenta> sds = sdService.findByDokumentId(dokumentId);
