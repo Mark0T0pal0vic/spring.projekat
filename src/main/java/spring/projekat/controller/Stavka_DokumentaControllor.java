@@ -18,7 +18,6 @@ import spring.projekat.service.Stavka_DokumentaService;
 @RestController
 public class Stavka_DokumentaControllor {
 
-	//PUT????
 	@Autowired
 	Stavka_DokumentaService sdService;
 	
@@ -45,6 +44,16 @@ public class Stavka_DokumentaControllor {
 		Stavka_Dokumenta retVal = sdService.save(sd);
 
 		return new ResponseEntity<>(retVal, HttpStatus.CREATED);
+	}
+	
+	//PUT
+	@RequestMapping(value = "api/stavkaDokumentas/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Stavka_Dokumenta> update(@PathVariable Long id,
+			@RequestBody Stavka_Dokumenta stavkaDokumenta) {
+		stavkaDokumenta.setId(id);
+		Stavka_Dokumenta retVal = sdService.save(stavkaDokumenta);
+
+		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
 
 	//DELETE
