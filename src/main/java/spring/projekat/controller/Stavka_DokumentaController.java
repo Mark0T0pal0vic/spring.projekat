@@ -16,7 +16,7 @@ import spring.projekat.model.Stavka_Dokumenta;
 import spring.projekat.service.Stavka_DokumentaService;
 
 @RestController
-public class Stavka_DokumentaControllor {
+public class Stavka_DokumentaController {
 
 	@Autowired
 	Stavka_DokumentaService sdService;

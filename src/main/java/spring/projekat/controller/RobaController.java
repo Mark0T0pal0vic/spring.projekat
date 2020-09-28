@@ -18,7 +18,7 @@ import spring.projekat.service.RobaService;
 
 
 @RestController
-public class RobaControllor {
+public class RobaController {
 
 	@Autowired
 	RobaService robaService;

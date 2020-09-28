@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(catalog = "spring.projekat", name="t_roba")
+@Table(catalog = "spring.projekat", name="roba")
 public class Roba {
 
 	@Id
@@ -24,7 +24,7 @@ public class Roba {
 	private long id;
 	
 	@Column(nullable=false, length=255)
-	private String name;
+	private String naziv;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="roba", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
@@ -35,10 +35,10 @@ public class Roba {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Roba(long id, String name) {
+	public Roba(long id, String naziv) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.naziv = naziv;
 	}
 
 	public long getId() {
@@ -49,12 +49,12 @@ public class Roba {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNaziv() {
+		return naziv;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNaziv(String naziv) {
+		this.naziv = naziv;
 	}
 
 	public Set<Stavka_Dokumenta> getStavkaDokumenta() {

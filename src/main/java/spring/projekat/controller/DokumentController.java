@@ -17,13 +17,14 @@ import spring.projekat.model.Dokument;
 import spring.projekat.service.DokumentService;
 
 @RestController
-public class DokumentControllor {
+public class DokumentController {
 
 	
 	@Autowired
 	DokumentService dokumentService;	
 	
 	//GET/ALL
+	@ApiOperation(value = "Pronalazi sva dokumenta")
 	@RequestMapping(value = "api/dokuments", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<List<Dokument>> getAllDokuments(){
 		List<Dokument> dokuments = dokumentService.findAll();

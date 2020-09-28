@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(catalog = "spring.projekat", name="t_stavka_dokumenta")
+@Table(catalog = "spring.projekat", name="stavka_dokumenta")
 public class Stavka_Dokumenta {
 
 	@Id
@@ -20,10 +20,10 @@ public class Stavka_Dokumenta {
 	private long id;
 	
 	@Column(nullable=false)
-	private int quantity;
+	private int kolicina;
 	
 	@Column(nullable=false)
-	private double price;
+	private double cena;
 	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -38,11 +38,11 @@ public class Stavka_Dokumenta {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Stavka_Dokumenta(long id, int quantity, double price, Dokument dokument, Roba roba) {
+	public Stavka_Dokumenta(long id, int kolicina, double cena, Dokument dokument, Roba roba) {
 		super();
 		this.id = id;
-		this.quantity = quantity;
-		this.price = price;
+		this.kolicina = kolicina;
+		this.cena = cena;
 		this.dokument = dokument;
 		this.roba = roba;		
 	}
@@ -55,20 +55,20 @@ public class Stavka_Dokumenta {
 		this.id = id;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public int getKolicina() {
+		return kolicina;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setKolicina(int kolicina) {
+		this.kolicina = kolicina;
 	}
 
-	public double getPrice() {
-		return price;
+	public double getCena() {
+		return cena;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
+	public void setCena(double cena) {
+		this.cena = cena;
 	}
 
 	public Dokument getDokument() {

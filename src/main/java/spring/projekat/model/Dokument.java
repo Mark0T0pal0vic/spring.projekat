@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(catalog = "spring.projekat", name="t_dokument")
+@Table(catalog = "spring.projekat", name="dokument")
 public class Dokument {
 
 	@Id
@@ -22,20 +22,20 @@ public class Dokument {
 	private long id;
 	
 	@Column(nullable=false, length=255)
-	private String name;
+	private String naziv;
 	
 	@Column(nullable=false)
-	private double price;
+	private double iznos;
 	
 	
 	@OneToMany(mappedBy="dokument", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Stavka_Dokumenta> stavkaDokumenta = new HashSet<Stavka_Dokumenta>();
 
-	public Dokument(long id, String name, double price) {
+	public Dokument(long id, String naziv, double iznos) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.price = price;
+		this.naziv = naziv;
+		this.iznos = iznos;
 	}
 
 	public Dokument() {
@@ -51,20 +51,20 @@ public class Dokument {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNaziv() {
+		return naziv;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNaziv(String naziv) {
+		this.naziv = naziv;
 	}
 
-	public double getPrice() {
-		return price;
+	public double getIznos() {
+		return iznos;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
+	public void setIznos(double iznos) {
+		this.iznos = iznos;
 	}
 
 	public Set<Stavka_Dokumenta> getStavkaDokumenta() {
