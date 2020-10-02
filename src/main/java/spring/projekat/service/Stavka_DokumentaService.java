@@ -2,6 +2,8 @@ package spring.projekat.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,13 +11,13 @@ import spring.projekat.model.Stavka_Dokumenta;
 import spring.projekat.repository.Stavka_DokumentaRepository;
 
 @Service
+@Transactional
 public class Stavka_DokumentaService {
-	
 	
 	@Autowired
 	Stavka_DokumentaRepository sdRepository;
 	
-	public List<Stavka_Dokumenta> findAll(){
+	public Iterable<Stavka_Dokumenta> findAll(){
 		return sdRepository.findAll();
 	}
 	

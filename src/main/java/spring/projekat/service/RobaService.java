@@ -1,6 +1,6 @@
 package spring.projekat.service;
 
-import java.util.List;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +9,7 @@ import spring.projekat.model.Roba;
 import spring.projekat.repository.RobaRepository;
 
 @Service
+@Transactional
 public class RobaService {
 
 	
@@ -18,7 +19,7 @@ public class RobaService {
 	@Autowired
 	Stavka_DokumentaService sdService;
 	
-	public List<Roba> findAll(){
+	public Iterable<Roba> findAll(){
 		return robaRepository.findAll();
 	}
 	
@@ -31,7 +32,6 @@ public class RobaService {
 	}
 	
 	public void remove(Long id) {
-		//dozvoliti brisanje predmeta koji nemaju Stavka_Dokumenta!!!!
 		if (sdService.findByRobaId(id).isEmpty()) {
 			robaRepository.deleteById(id);
 		}

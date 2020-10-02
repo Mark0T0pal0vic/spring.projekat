@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,29 +23,29 @@ public class Stavka_Dokumenta {
 	@Column(nullable=false)
 	private int kolicina;
 	
-	@Column(nullable=false)
+	@Column
 	private double cena;
 	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Dokument dokument;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	
+	@OneToOne
 	private Roba roba;
 	
-
-	public Stavka_Dokumenta() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	public Stavka_Dokumenta(long id, int kolicina, double cena, Dokument dokument, Roba roba) {
 		super();
 		this.id = id;
 		this.kolicina = kolicina;
 		this.cena = cena;
 		this.dokument = dokument;
-		this.roba = roba;		
+		this.roba = roba;
+	}
+
+	public Stavka_Dokumenta() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public long getId() {
@@ -85,9 +86,6 @@ public class Stavka_Dokumenta {
 
 	public void setRoba(Roba roba) {
 		this.roba = roba;
-	}
-
-
-	
+	}	
 	
 }

@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import spring.projekat.model.Roba;
@@ -18,6 +21,7 @@ import spring.projekat.service.RobaService;
 
 
 @RestController
+@RequestMapping("/api/")
 public class RobaController {
 
 	@Autowired
@@ -25,15 +29,15 @@ public class RobaController {
 	
 	
 	//GET/ALL
-	@RequestMapping(value = "api/robas", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<Roba>> getAllRobas(){
-		List<Roba> robas = robaService.findAll();
+	@GetMapping(value = "robas", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Iterable<Roba>> getAllRobas(){
+		Iterable<Roba> robas = robaService.findAll();
 		
 		return new ResponseEntity<>(robas, HttpStatus.OK);
 	}
 	
 	//GET/ONE
-	@RequestMapping(value = "api/roba/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(value = "roba/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Roba> getRoba(@PathVariable Long id){
 		Roba roba = robaService.findOne(id);
 		
@@ -42,7 +46,7 @@ public class RobaController {
 	
 	
 	//POST
-	@RequestMapping(value = "api/robas", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "robas", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Roba> create(@RequestBody Roba roba) {
 		Roba retVal = robaService.save(roba);
 
@@ -51,7 +55,7 @@ public class RobaController {
 	
 	
 	//PUT
-	@RequestMapping(value = "api/robas/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "roba/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Roba> update(@PathVariable Long id,
 			@RequestBody Roba roba) {
 		roba.setId(id);
@@ -61,12 +65,12 @@ public class RobaController {
 	}
 	
 	//DELETE
-	@RequestMapping(value = "api/robas/{id}", method = RequestMethod.DELETE)
+	@DeleteMapping(value = "roba/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		Roba roba = robaService.findOne(id);
 		if (roba != null) {
-			robaService.remove(id);
-			return new ResponseEntity<>(HttpStatus.OK);
+				robaService.remove(id);
+				return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

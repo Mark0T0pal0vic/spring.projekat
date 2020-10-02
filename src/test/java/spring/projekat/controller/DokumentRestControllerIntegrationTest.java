@@ -21,7 +21,7 @@ public class DokumentRestControllerIntegrationTest {
 	@Autowired
 	private TestRestTemplate testRestTemplate;
 
-	//Testira GetById iz tabele t_dokument
+	//Testira GetById iz tabele dokument
 	@Test
 	public void GetDokumentByIdTest() {
 		
@@ -34,7 +34,7 @@ public class DokumentRestControllerIntegrationTest {
 		 
 	}
 	
-	//Testiranje POST metode u tabelu t_roba
+	//Testiranje POST metode u tabelu roba
 	@Test
 	public void saveDokument() {
 		

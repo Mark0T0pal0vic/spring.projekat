@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(catalog = "spring.projekat", name="dokument")
 public class Dokument {
@@ -24,23 +26,25 @@ public class Dokument {
 	@Column(nullable=false, length=255)
 	private String naziv;
 	
-	@Column(nullable=false)
+	@Column
 	private double iznos;
 	
 	
 	@OneToMany(mappedBy="dokument", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Stavka_Dokumenta> stavkaDokumenta = new HashSet<Stavka_Dokumenta>();
 
-	public Dokument(long id, String naziv, double iznos) {
+	public Dokument() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public Dokument(long id, String naziv, double iznos, Set<Stavka_Dokumenta> stavkaDokumenta) {
 		super();
 		this.id = id;
 		this.naziv = naziv;
 		this.iznos = iznos;
-	}
-
-	public Dokument() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.stavkaDokumenta = stavkaDokumenta;
 	}
 
 	public long getId() {
